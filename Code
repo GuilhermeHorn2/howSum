@@ -1,0 +1,49 @@
+def g(n,l,k=[]):
+    global r
+    r = k
+
+    if n == 0:
+        return True
+    if n < 0:
+        return False
+    for i in l:
+        a = n-i
+        if g(a,l) == True:
+            k.append(i)
+            return True
+
+    return False
+
+def soma(l):
+    a = "+".join(str(e) for e in l)
+    return a
+
+g(280,[7,14])
+print(soma(r),'= {}'.format(sum((r))))
+
+#memoization
+
+def mg(n,l,k=[],memo={}):
+    global r
+    r = k
+    if n in memo:
+        return memo[n]
+    if n == 0:
+        return True
+    if n < 0:
+        return False
+    for i in l:
+        a = n-i
+        memo[n] = g(a,l)
+        if mg(a,l) == True:
+            k.append(i)
+            return True
+
+    return False
+
+def soma(l):
+    a = "+".join(str(e) for e in l)
+    return a
+
+mg(280,[7,14])
+print(soma(r),'= {}'.format(sum((r))))
